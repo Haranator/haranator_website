@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio & Resume</title>
+  <style>
+    /* CSS Variables for Easy Styling */
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #1e293b;
+      --text-muted: #64748b;
+      --accent-color: #2563eb;
+      --accent-hover: #1d4ed8;
+      --border-color: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+    }
+
+    /* Hero / Profile Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        flex-direction: row;
+        text-align: left;
+      }
+    }
+
+    .profile-img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent-color);
+      flex-shrink: 0;
+      background-color: #e2e8f0;
+    }
+
+    .hero-text h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-color);
+    }
+
+    .hero-text .subtitle {
+      font-size: 1rem;
+      color: var(--accent-color);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Section Titles */
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    /* Skills / Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      background: #eff6ff;
+      color: var(--accent-color);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid #bfdbfe;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: var(--accent-color);
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background-color 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    /* PDF Viewer Container */
+    .pdf-container {
+      width: 100%;
+      height: 600px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .pdf-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Contact Links */
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .links a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 1rem 0;
+    }
+      
+      
+    /* Horizontal Scroll Slider */
+.slider-container {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
+  scroll-behavior: smooth;
+}
+
+/* Custom Sleek Scrollbar */
+.slider-container::-webkit-scrollbar {
+  height: 6px;
+}
+.slider-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+.slider-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.slider-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Certificate Card Item */
+.cert-card {
+  /* On mobile, cards take 85% width so the next card peeks into view */
+  flex: 0 0 85%;
+  scroll-snap-align: start;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Fixed width on tablet/desktop */
+@media (min-width: 640px) {
+  .cert-card {
+    flex: 0 0 320px;
+  }
+}
+
+.cert-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.cert-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #f1f5f9;
+}
+
+.cert-info {
+  padding: 1rem;
+}
+
+.cert-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+}
+
+.cert-info p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.slide-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Profile / Header Section -->
+    <header class="card hero">
+      <!-- Photo Placeholder: Replaced automatically when photo.jpg is in the same folder -->
+      <img src="photo.jpg" alt="Profile Picture" class="profile-img" onerror="this.src='https://via.placeholder.com/130?text=Your+Photo'">
+      
+      <div class="hero-text">
+        <h1>JULIUS DAN SIMON HARA</h1>
+        <div class="subtitle">Computer Engineering Student | Technology & Media</div>
+        <p>Passionate about digital systems, hardware-software integration, journalistic writing, and problem-solving. Always looking to learn and build impactful projects.</p>
+        
+        <div class="tags">
+          <span class="tag">Digital Logic Design</span>
+          <span class="tag">Assembly & C++</span>
+          <span class="tag">Python & Rust</span>
+          <span class="tag">Cybersecurity</span>
+          <span class="tag">Journalism</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- PDF CV / Resume Section -->
+<section class="card">
+  <h2>Curriculum Vitae</h2>
+  
+  <!-- CV Image Display -->
+  <div style="text-align: center; margin-top: 1rem;">
+    <img src="hara_resume.webp" alt="My Resume" style="width: 100%; max-width: 700px; height: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+  </div>
+
+  <!-- Download Link for Printable Copy -->
+  <div style="text-align: center; margin-top: 1rem;">
+    <a href="resume.pdf" download class="btn">Download PDF File</a>
+  </div>
+</section>
+
+
+<!-- Certifications Section -->
+<section class="card">
+  <h2>Certifications & Accomplishments</h2>
+  
+  <p class="slide-hint">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+    Swipe horizontally to view all certificates
+  </p>
+
+  <div class="slider-container">
+    
+    <!-- Certificate 1 -->
+    <div class="cert-card">
+      <img src="cert1.webp" alt="Certification 1" onerror="this.src='https://via.placeholder.com/400x250?text=Certificate+1+.WEBP'">
+      <div class="cert-info">
+        <h3>Introduction to Cybersecurity</h3>
+        <p>CISCO • 2026</p>
+      </div>
+    </div>
+
+    <!-- Certificate 2 -->
+    <div class="cert-card">
+      <img src="cert2.webp" alt="Certification 2" onerror="this.src='https://via.placeholder.com/400x250?text=Certificate+2+.WEBP'">
+      <div class="cert-info">
+        <h3>Learn SQL and Data Management</h3>
+        <p>Ethel Programming Computer Programming Services • 2026</p>
+      </div>
+    </div>
+
+    <!-- Certificate 3 -->
+    <div class="cert-card">
+      <img src="cert3.webp" alt="Certification 3" onerror="this.src='https://via.placeholder.com/400x250?text=Certificate+3+.WEBP'">
+      <div class="cert-info">
+        <h3>AI Made Practical (Prompt Engineering)</h3>
+        <p>DICT • 2026</p>
+      </div>
+    </div>
+
+    <!-- You can duplicate the <div class="cert-card"> block to add more certificates -->
+
+  </div>
+</section>
+
+    <!-- Contact & Links Section -->
+    <section class="card">
+      <h2>Get In Touch</h2>
+      <p>Feel free to reach out via email or connect with me on social platforms.</p>
+      <div class="links">
+        <a href="mailto:julius.hara3@gmail.com">Email Me</a>
+        <a href="https://github.com/haranator" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/haranator/" target="_blank">LinkedIn</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      © 2026 Julius Dan Simon Hara. All rights reserved.
+    </footer>
+
+  </div>
+
+</body>
+</html>
